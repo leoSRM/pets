@@ -47,6 +47,17 @@ class Pets extends React.Component {
     	  	}
       	}
       });
+	  this.setList(maleList, femaleList);
+    }.bind(this));
+  }
+
+  setList (maleList, femaleList) {
+	maleList.sort(function(a, b) {
+		return (a).localeCompare(b)
+	  });
+	  femaleList.sort(function(a, b) {
+		return (a).localeCompare(b)
+	  });
       this.setState ({
       	cats_male: maleList.map((item, index) => 
       		<a href="#" className="list-group-item" key={index}>
@@ -57,7 +68,6 @@ class Pets extends React.Component {
  					<h4 className="list-group-item-heading">{item}</h4>
  					</a>)
       });
-    }.bind(this));
   }
  
   componentWillUnmount() {
