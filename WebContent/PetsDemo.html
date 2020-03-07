@@ -3,17 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <title>pets</title>
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
-<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
-<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script
+	src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script
+	src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
 <body>
-<div id="pets_list"></div>
+	<div id="pets_list"></div>
 
-<script type="text/babel">
+	<script type="text/babel">
 const pet_type = 'Cat';
 class Pets extends React.Component {
   
@@ -54,19 +59,19 @@ class Pets extends React.Component {
   setList (maleList, femaleList) {
 	maleList.sort(function(a, b) {
 		return (a).localeCompare(b)
-	  });
-	  femaleList.sort(function(a, b) {
+	});
+	femaleList.sort(function(a, b) {
 		return (a).localeCompare(b)
-	  });
-      this.setState ({
+	});
+    this.setState ({
       	cats_male: maleList.map((item, index) => 
       		<a href="#" className="list-group-item" key={index}>
- 					<h4 className="list-group-item-heading">{item}</h4>
- 					</a>),
+ 				<h4 className="list-group-item-heading">{item}</h4>
+ 			</a>),
         cats_female: femaleList.map((item, index) => 
       		<a href="#" className="list-group-item" key={index}>
- 					<h4 className="list-group-item-heading">{item}</h4>
- 					</a>)
+ 				<h4 className="list-group-item-heading">{item}</h4>
+ 			</a>)
       });
   }
  
