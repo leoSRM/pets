@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>pets</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="pets_list"></div>
+
+<script type="text/babel">
+const pet_type = 'Cat';
+class Pets extends React.Component {
+  
+  constructor(props) {
+      super(props);
+      this.state = {
+        cats_male: [],
+        cats_female: []
+      }
+  }
+
+ 
+  componentDidMount() {
+    this.serverRequest = $.get(this.props.source, function (result) {
+    	var maleList = [];
+    	var femaleList = [];
+      result.map((item) => {
+      	if (item && item.pets) {
+      		if (item.gender == 'Male') {
+      			item.pets.forEach((pet) => {
+      				if (pet.type == pet_type) {
+      					maleList.push(pet.name);
+      				}
+     		 		});
+      		} else {
+     		 		item.pets.forEach((pet) => {
+      				if (pet.type == pet_type) {
+      					femaleList.push(pet.name);
+      				}
+      			});
+    	  	}
+      	}
+      });
+      this.setState ({
+      	cats_male: maleList.map((item, index) => 
+      		<a href="#" className="list-group-item" key={index}>
+ 					<h4 className="list-group-item-heading">{item}</h4>
+ 					</a>),
+        cats_female: femaleList.map((item, index) => 
+      		<a href="#" className="list-group-item" key={index}>
+ 					<h4 className="list-group-item-heading">{item}</h4>
+ 					</a>)
+      });
+    }.bind(this));
+  }
+ 
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+ 
+  render() {
+    return (
+     <div className="list-group">
+      	<a href="#" className="list-group-item active">
+        	<h4 className="list-group-item-heading">
+            	Male
+        	</h4>
+    	</a>
+    	{this.state.cats_male}
+    	<a href="#" className="list-group-item active">
+        	<h4 className="list-group-item-heading">
+            	Female
+        	</h4>
+    	</a>
+    	{this.state.cats_female}
+      </div>
+    );
+  }
+}
+ 
+ReactDOM.render(
+  <Pets source="http://5c92dbfae7b1a00014078e61.mockapi.io/owners" />,
+  document.getElementById('pets_list')
+);
+</script>
+
+</body>
+</html>
